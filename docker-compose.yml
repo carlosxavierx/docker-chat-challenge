@@ -1,0 +1,32 @@
+services:
+
+  backend:
+    build: ./backend
+
+    container_name: backend
+
+    env_file:
+      - .env
+
+    ports:
+      - "28080:8000"
+
+    networks:
+      - ai-network
+
+  frontend:
+    build: ./frontend
+
+    container_name: frontend
+
+    ports:
+      - "23080:80"
+
+    depends_on:
+      - backend
+
+    networks:
+      - ai-network
+
+networks:
+  ai-network:
